@@ -188,6 +188,10 @@ clean:
 	@echo "========================================================"
 
 	$(POWERSHELL) $(MAKEDIR)\scripts\clean.ps1
+	
+	cd third_party
+	$(MAKE) clean
+	cd ..
 
 restore:
 	@echo "========================================================"
@@ -204,6 +208,11 @@ check-copyright-headers:
 	$(POWERSHELL) $(MAKEDIR)\scripts\check-copyright-headers.ps1
 
 build: $(MAIN_ASSEMBLY)
+
+third-party: 
+	cd third_party
+	$(MAKE) CONFIGURATION=$(CONFIGURATION)
+	cd ..
 
 test: $(NUNIT_ASSEMBLIES)
 	@echo "========================================================"
